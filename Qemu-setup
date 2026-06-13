@@ -1,0 +1,78 @@
+#!/bin/bash
+
+# ==============================================================================
+# FEDORA 44 KDE COMPREHENSIVE KVM/QEMU DEPLOYMENT SCRIPT
+# Target Path: /mnt/secondary/virtualization/qemu
+# ==============================================================================
+
+# Strict enforcement: check for root context execution
+if [ "$EUID" -ne 0 ]; then
+  echo "[-] Critical: This script updates system frameworks. Run via sudo: sudo $0"
+  exit 1
+fi
+
+# Locate the actual, non-root user account invoking the script
+ACTUAL_USER=${SUDO_USER:-$USERNAME}
+
+echo "=============================================================================="
+echo "🎯 CRITICAL PRE-REQUISITE: /etc/fstab STORAGE LAYOUT VERIFICATION"
+echo "=============================================================================="
+echo "To prevent dynamic permission drops and SELinux environment locks on Btrfs,"
+echo "ensure your secondary drive entry in /etc/fstab matches this specific layout:"
+echo ""
+echo "UUID=YOUR-NVME-UUID-HERE  /mnt/secondary  btrfs  defaults,noatime,compress=zstd:3,ssd,discard=async  0  2"
+echo ""
+echo "🛑 WARNING: Absolutely avoid using 'context=system_u:object_r:unlabeled_t:s0'"
+echo "as a mount option. It freezes filesystem security structures permanently."
+echo "=============================================================================="
+read -p "Press [Enter] to confirm your /etc/fstab looks correct to begin installation..."
+
+echo -e "\n[+] Step 1: Deploying Virtualization Hypervisor Groups via DNF5..."
+dnf install @virtualization -y
+
+echo -e "\n[+] Step 2: Provisioning Local User Account Controls..."
+# Bind account structures directly to the system hypervisor hypergroup
+usermod -aG libvirt "$ACTUAL_USER"
+echo "[OK] User '$ACTUAL_USER' added to the libvirt security group."
+
+echo -e "\n[+] Step 3: Resolving Directory Tree and Storage Path Traversal..."
+# Force standard folder tree traversal properties down the mount structure
+mkdir -p /mnt/secondary/virtualization/qemu
+chmod +x /mnt
+chmod +x /mnt/secondary
+chmod +x /mnt/secondary/virtualization
+chmod +x /mnt/secondary/virtualization/qemu
+
+# Pass absolute file ownership properties to the internal system user daemon
+chown -R qemu:qemu /mnt/secondary/virtualization/qemu/
+echo "[OK] Target directory structure compiled and permissions assigned."
+
+echo -e "\n[+] Step 4: Synchronizing SELinux Security Context Mapping..."
+# Map storage properties directly to match default system image environments
+semanage fcontext -a -e /var/lib/libvirt/images "/mnt/secondary/virtualization/qemu(/.*)?"
+restorecon -R -v /mnt/secondary/virtualization/qemu
+echo "[OK] SELinux folder context alignment completed."
+
+echo -e "\n[+] Step 5: Authorizing QEMU Engine Memory Execution Bounds..."
+# Enable permanent runtime exception allowing JIT execution patterns
+setsebool -P virt_use_execmem on
+echo "[OK] Policy constraints updated globally."
+
+echo -e "\n[+] Step 6: Initializing Core System Engine Daemons..."
+systemctl daemon-reload
+systemctl enable --now libvirtd
+echo "[OK] Virtualization background processing modules started."
+
+echo -e "\n=============================================================================="
+echo "🎉 PROCESS COMPLETION REPORT"
+echo "=============================================================================="
+echo "1. 🛑 REBOOT REQUIRED: You must restart your computer now to apply user groups."
+echo "2. LAUNCH PROTOCOL: To completely bypass Wayland mouse tracking drift inside"
+echo "   KDE Plasma, always initialize Virtual Machine Manager via this alias:"
+echo "   WAYLAND_DISPLAY= virt-manager"
+echo ""
+echo "3. IN-GUEST KALI SYNCHRONIZATION RUNTIME:"
+echo "   Once you install Kali, run these terminal commands inside the VM to prevent cursor misalignment:"
+echo "   sudo apt update && sudo apt install spice-vdagent qemu-guest-agent kali-desktop-gnome -y"
+echo "   (Log out of Kali, click the gear icon on the login screen, select GNOME on Wayland)."
+echo "=============================================================================="
