@@ -1,0 +1,31 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/bookmarks
+#
+
+- Developer:
+    - Github:
+        - abbr: GH
+          href: https://github.com/
+
+- Social:
+    - Google Message:
+        - abbr: GM
+          href: https://messages.google.com/web
+    - GroupMe:
+        - abbr: GR
+          href: https://web.groupme.com/chats
+
+- AI Links:
+    - ChatGPT:
+        - abbr: OAI
+          href: https://chatgpt.com/
+    - Claude:
+        - abbr: CL
+          href: https://claude.ai/
+    - Gemini:
+        - abbr: GI
+          href: https://gemini.google.com/
+    - Grok:
+        - abbr: XAI
+          href: https://x.ai/
