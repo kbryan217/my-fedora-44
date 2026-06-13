@@ -38,6 +38,16 @@ echo "=== Configuring firewall permissions for Docker containers ==="
 sudo firewall-cmd --permanent --zone=trusted --add-interface=docker0
 sudo firewall-cmd --reload
 
+sudo systemctl enable docker.socket
+newgrp docker
+sudo systemctl enable --now docker.socket
+sudo firewall-cmd --zone=trusted --remove-interface=docker0 --permanent
+sudo firewall-cmd --reload
+sudo dnf install -y iptables-nft
+sudo alternatives --set iptables /usr/bin/iptables-nft
+sudo systemctl daemon-reload
+sudo systemctl enable --now docker.service
+
 echo "========================================================="
 echo " SETUP COMPLETE"
 echo "========================================================="
