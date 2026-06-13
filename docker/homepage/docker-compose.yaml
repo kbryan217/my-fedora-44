@@ -1,0 +1,11 @@
+services:
+# Homepage - Dashboard Application
+  homepage:
+    image: ghcr.io/benphelps/homepage:latest
+    restart: unless-stopped
+    container_name: homepage
+    ports:
+      - 3000:3000
+    volumes:
+      - ./containers/homepage/config:/app/config # Make sure your local config directory exists
+      - /var/run/docker.sock:/var/run/docker.sock:ro # (optional) For docker integrations
