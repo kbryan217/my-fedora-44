@@ -1,0 +1,115 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/services
+#
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+#
+- Server Nodes:
+    - UniFi Controller:
+        icon: unifi.png
+        href: https://unifi.marauders.home/login
+#       href: https://192.168.1.1
+        description: UDM Pro
+#
+    - Pegasus:
+        icon: proxmox.png
+        href: https://pegasus.marauders.home/
+#       href: https://192.168.20.11:5000
+        description: Proxmox Multi-Node Manager
+#
+    - Hive1:
+        icon: proxmox.png
+        href: https://hive1.marauders.home
+#       href: https://192.168.20.11
+        description: Proxmox Node 1 (Primary Node)
+#
+    - Hive2:
+        icon: proxmox.png
+        href: https://hive2.marauders.home
+#       href: https://192.168.20.12
+        description: Proxmox Node 2
+#
+    - Hive3:
+        icon: proxmox.png
+        href: https://hive3.marauders.home
+#       href: https://192.168.20.13
+#       description: Proxmox Node 3
+#
+    - Rewind - Plex Server:
+        icon: plex.png
+        href: https://plex.marauders.home
+#       href: https://192.168.40.15
+        description: Watch movies and TV shows.
+#
+    - TrueNAS:
+        icon: truenas.png
+        href: https://truenas.marauders.home
+#       href: https://192.168.40.10
+        description: Truenas Server
+#
+#
+- Network Apps:
+#
+    - DNS Technitium:
+        icon: technitium.png
+        href: https://dns.marauders.home
+        description: Primary DNS Sevices
+#
+    - DNS AdGuard:
+        icon: adguard
+        href: https://adguard.marauders.home
+        description: Secondary DNS Sevices
+#
+#
+- Starr Apps:
+#
+    - Gluetun:
+        icon: gluetun.png
+        href: http://gluetun.marauders.home
+        description: placeholder
+#
+    - Overseerr:
+        icon: overseerr.png
+        href: http://overseerr.marauders.home
+        description: Request Media 😎
+#
+    - Sonarr:
+        icon: sonarr.png
+        href: http://sonarr.marauders.home
+        description: TV Show Management
+#
+    - Radarr:
+        icon: radarr.png
+        href: http://radarr.marauders.home
+        description: Movie Management
+#
+    - Prowlarr:
+        icon: prowlarr.png
+        href: http://prowlarr.marauders.home
+        description: Media Indexer
+#
+    - qBittorrent:
+        icon: qbittorrent.png
+        href: http://torrent.marauders.home
+        description: Download Manager
+#
+    - Autobrr:
+        icon: autobrr.png
+        href: http://autobrr.marauders.home
+        description: Automates the process of downloading torrents
+#
+    - Byparr:
+        icon: byparr.png
+        href: http://byparr.marauders.home
+        description: Proxy server to bypass Cloudflare and DDoS-GUARD protection
+#
+    - Cleanuparr:
+        icon: cleanuparr.png
+        href: http://cleanuparr.marauders.home
+        description: automating the cleanup of unwanted or blocked files in Sonarr, Radarr, and supported download clients like qBittorrent
+#
+    - Configarr:
+        icon: configarr.png
+        href: http://configarr.marauders.home
+        description: open-source tool designed to simplify configuration and synchronization for Sonarr and Radarr
