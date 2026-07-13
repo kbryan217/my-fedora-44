@@ -1,0 +1,5 @@
+# alias examples
+alias alert='notify-send'
+alias python=python3
+alias pip=pip3
+alias steam='steam vgsa -or whatever-'
